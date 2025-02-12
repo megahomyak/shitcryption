@@ -15,7 +15,7 @@ checkvar() {
 checkvar TARGET 'The $TARGET path is not provided.'
 
 PASSWORD_FILE_PATH="$TARGET.password"
-ARCHIVE_PATH="$TARGET.tar.zstd"
+ARCHIVE_PATH="$TARGET.tar.gpg.zstd"
 
 if [ -d "$TARGET" ]; then
     if [ -f "$ARCHIVE_PATH" ]; then
