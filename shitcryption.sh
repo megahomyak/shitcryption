@@ -37,8 +37,9 @@ else
         err 'No $TARGET or respective archive found.'
     fi
     read -s -p "Password: " PASSWORD
+    echo ""
     mkdir -p "$TARGET"
-    if gpg --batch --yes --passphrase "$PASSWORD" --output - --decrypt "$ARCHIVE_PATH" | tar -I zstd -xf - -C "$TARGET" ; then
+    if gpg --quiet --batch --yes --passphrase "$PASSWORD" --output - --decrypt "$ARCHIVE_PATH" | tar -I zstd -xf - -C "$TARGET" ; then
         rm "$ARCHIVE_PATH"
         echo "$PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "Decrypted successfully"
