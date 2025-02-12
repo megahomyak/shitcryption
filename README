@@ -3,6 +3,7 @@ Temporary secret encryption and decryption. You're supposed to decrypt the secre
 DEPENDENCIES YOU NEED:
 * gpg
 * tar with zstd
+* bash
 
 You can put a similar thing in your ~/.bashrc:
 
