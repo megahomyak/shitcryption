@@ -1,0 +1,33 @@
+Temporary secret encryption and decryption. You're supposed to decrypt the secrets for a read or a modification, then encrypt them back immediately after
+
+DEPENDENCIES YOU NEED:
+* gpg
+* tar with zstd
+
+You can put a similar thing in your ~/.bashrc:
+
+```
+shite() {
+    TARGET=/path/to/secrets/directory /path/to/shitcryption.sh "$@"
+}
+```
+
+Then, use
+
+```
+shite
+```
+
+to make the first encryption,
+
+```
+shite
+```
+
+to decrypt, and
+
+```
+shite
+```
+
+to make subsequent encryptions. It will tell you if it just encrypted or decrypted your stuff
