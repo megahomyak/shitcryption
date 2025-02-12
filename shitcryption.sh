@@ -15,7 +15,7 @@ checkvar() {
 checkvar TARGET 'The $TARGET path is not provided.'
 
 PASSWORD_FILE_PATH="$TARGET.password"
-ARCHIVE_PATH="$TARGET.tar"
+ARCHIVE_PATH="$TARGET.tar.zstd"
 
 if [ -d "$TARGET" ]; then
     if [ -f "$ARCHIVE_PATH" ]; then
@@ -26,11 +26,11 @@ if [ -d "$TARGET" ]; then
         read -p "Password: " PASSWORD
     fi
     if tar -I 'zstd -19' -cf - -C "$TARGET" . | gpg --batch --yes --passphrase "$PASSWORD" --symmetric --cipher-algo AES256 --output "$ARCHIVE_PATH" - ; then
-        rm -r "$TARGET"
+        rm -rf "$TARGET"
         rm "$PASSWORD_FILE_PATH" 2>/dev/null || true
         echo "Encrypted successfully"
     else
-        rm -r "$ARCHVIE_PATH"
+        rm "$ARCHIVE_PATH"
     fi
 else
     if [ ! -f "$ARCHIVE_PATH" ]; then
@@ -39,10 +39,10 @@ else
     read -s -p "Password: " PASSWORD
     mkdir -p "$TARGET"
     if gpg --batch --yes --passphrase "$PASSWORD" --output - --decrypt "$ARCHIVE_PATH" | tar -I zstd -xf - -C "$TARGET" ; then
-        rm -r "$ARCHIVE_PATH"
+        rm "$ARCHIVE_PATH"
         echo "$PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "Decrypted successfully"
     else
-        rm -r "$TARGET"
+        rm -rf "$TARGET"
     fi
 fi
