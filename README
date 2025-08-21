@@ -1,4 +1,4 @@
-Temporary secret encryption and decryption for Linux. You're supposed to decrypt the secrets for a read or a modification, then encrypt them back immediately after
+Temporary secret encryption and decryption for Linux. You're supposed to decrypt the secrets for a read or a modification, then encrypt them back immediately after. Doesn't save from a scanning of your storage device, but does help from programs knocking on your filesystem
 
 DEPENDENCIES YOU NEED:
 * gpg
