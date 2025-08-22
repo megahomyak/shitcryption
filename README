@@ -4,6 +4,8 @@ DEPENDENCIES YOU NEED:
 * gpg
 * tar with zstd
 * bash
+* shred
+* cat
 
 You can put a similar thing in your ~/.bashrc:
 

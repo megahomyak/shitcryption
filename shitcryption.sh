@@ -27,7 +27,7 @@ if [ -d "$TARGET" ]; then
     fi
     if tar -I 'zstd -19' -cf - -C "$TARGET" . | gpg --batch --yes --passphrase "$PASSWORD" --symmetric --cipher-algo AES256 --output "$ARCHIVE_PATH" - ; then
         rm -rf "$TARGET"
-        rm "$PASSWORD_FILE_PATH" 2>/dev/null || true
+        shred -fu "$PASSWORD_FILE_PATH" 2>/dev/null || true
         echo "Encrypted successfully"
     else
         rm "$ARCHIVE_PATH"
