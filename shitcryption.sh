@@ -12,6 +12,12 @@ checkvar() {
     fi
 }
 
+shred_dir() (
+    DIR="$1"
+    find "$DIR" -type f | xargs shred -fu 2>/dev/null
+    rm -rf "$DIR"
+)
+
 checkvar TARGET 'The $TARGET path is not provided.'
 
 PASSWORD_FILE_PATH="$TARGET.password"
@@ -26,7 +32,7 @@ if [ -d "$TARGET" ]; then
         read -p "Password: " PASSWORD
     fi
     if tar -I 'zstd -19' -cf - -C "$TARGET" . | gpg --batch --yes --passphrase "$PASSWORD" --symmetric --cipher-algo AES256 --output "$ARCHIVE_PATH" - ; then
-        rm -rf "$TARGET"
+        shred_dir "$TARGET"
         shred -fu "$PASSWORD_FILE_PATH" 2>/dev/null || true
         echo "Encrypted successfully"
     else
@@ -44,6 +50,6 @@ else
         echo "$PASSWORD" > "$PASSWORD_FILE_PATH"
         echo "Decrypted successfully"
     else
-        rm -rf "$TARGET"
+        shred_dir "$TARGET"
     fi
 fi
