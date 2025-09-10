@@ -1,15 +1,9 @@
 #!/bin/bash
-set -e
+set -euo pipefail
 
 err() {
     echo "$1" >&2
     exit 1
-}
-
-checkvar() {
-    if [ "${!1}" = "" ]; then
-        err "$2"
-    fi
 }
 
 shred_dir() (
@@ -18,7 +12,7 @@ shred_dir() (
     rm -rf "$DIR"
 )
 
-checkvar TARGET 'The $TARGET path is not provided.'
+TARGET="$1"
 
 PASSWORD_FILE_PATH="$TARGET.password"
 ARCHIVE_PATH="$TARGET.tar.gpg.zstd"

@@ -10,27 +10,25 @@ DEPENDENCIES YOU NEED:
 You can put a similar thing in your ~/.bashrc:
 
 ```
-shite() {
-    TARGET=/path/to/secrets/directory /path/to/shitcryption.sh "$@"
-}
+alias shite="path/to/shitcryption.sh"
 ```
 
 Then, use
 
 ```
-shite
+shite path/to/secrets/directory
 ```
 
 to make the first encryption,
 
 ```
-shite
+shite path/to/secrets/directory
 ```
 
 to decrypt, and
 
 ```
-shite
+shite path/to/secrets/directory
 ```
 
 to make subsequent encryptions. It will tell you if it just encrypted or decrypted your stuff
